@@ -1,0 +1,50 @@
+import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkSync } from "@/components/auth/clerk-sync";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Tripzyy",
+    template: "%s | Tripzyy",
+  },
+  description: "Plan multi-city journeys, organize activities, track real-time budgets, and discover public travel itineraries.",
+  keywords: ["travel planner", "multi-city trips", "itinerary builder", "budget tracker", "travel community"],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/tripzyy-icon.svg", type: "image/svg+xml" },
+      { url: "/tripzyy-icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png" }],
+    shortcut: ["/favicon.ico"],
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className="h-full">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/tripzyy-icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#FFF5E9] text-[#171313] antialiased">
+        <ClerkProvider>
+          <ClerkSync />
+          {children}
+        </ClerkProvider>
+      </body>
+    </html>
+  );
+}
