@@ -688,7 +688,11 @@ class ItineraryService:
                 await self.db.execute(
                     select(TripStop)
                     .where(TripStop.trip_id == trip_id)
-                    .options(selectinload(TripStop.activities))
+                    .options(
+                        selectinload(TripStop.activities),
+                        selectinload(TripStop.destination),
+                        selectinload(TripStop.accommodations),
+                    )
                     .order_by(TripStop.order_index)
                 )
             )

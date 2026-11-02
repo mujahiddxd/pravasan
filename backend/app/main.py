@@ -20,7 +20,7 @@ logging.basicConfig(
 for noisy in ("passlib", "asyncio", "aiosmtplib", "multipart"):
     logging.getLogger(noisy).setLevel(logging.WARNING)
 
-logger = logging.getLogger("tripzyy")
+logger = logging.getLogger("pravasan")
 
 
 def create_app() -> FastAPI:
@@ -44,6 +44,15 @@ def create_app() -> FastAPI:
 
     _register_exception_handlers(app)
     _register_routers(app)
+
+    @app.get("/", tags=["meta"])
+    async def root() -> dict[str, str]:
+        return {
+            "name": settings.PROJECT_NAME,
+            "status": "online",
+            "docs": "/docs",
+            "health": "/health",
+        }
 
     @app.get("/health", tags=["meta"])
     async def health() -> dict[str, str]:

@@ -5,11 +5,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Tripzyy",
-    template: "%s | Tripzyy",
+    default: "Pravasan | ಪ್ರವಾಸನ್ - Karnataka Tour & Travel Platform",
+    template: "%s | Pravasan (ಪ್ರವಾಸನ್)",
   },
-  description: "Plan multi-city journeys, organize activities, track real-time budgets, and discover public travel itineraries.",
-  keywords: ["travel planner", "multi-city trips", "itinerary builder", "budget tracker", "travel community"],
+  description: "Explore Karnataka's rich heritage, Western Ghats, coastal beaches, and royal palaces with Pravasan (ಪ್ರವಾಸನ್). Plan journeys, discover curated destinations, and book authentic Karnataka travel experiences.",
+  keywords: ["pravasan", "ಪ್ರವಾಸನ್", "karnataka tourism", "karnataka travel planner", "hampi tour", "mysuru palace", "western ghats", "gokarna beaches"],
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -35,7 +35,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>

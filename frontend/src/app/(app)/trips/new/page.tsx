@@ -1098,7 +1098,7 @@ export default function CreateTripPage() {
                   <TripMap
                     destinations={selectedDestinations}
                     activities={selectedActivities}
-                    height="200px"
+                    height="500px"
                     showControls={true}
                     showLegend={true}
                   />

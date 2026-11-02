@@ -92,7 +92,7 @@ export function ClerkSync() {
           body: JSON.stringify({
             email,
             first_name: user.firstName || "Traveler",
-            last_name: user.lastName || "",
+            last_name: user.lastName || "User",
             clerk_id: user.id,
             role,
           }),

@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     )
 
     # --- App ---
-    PROJECT_NAME: str = "Tripzyy"
+    PROJECT_NAME: str = "Pravasan"
     API_V1_PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["development", "test", "production"] = "development"
     DEBUG: bool = True
@@ -49,6 +49,8 @@ class Settings(BaseSettings):
     # --- Email / OTP (R1) ---
     REQUIRE_EMAIL_VERIFICATION: bool = True
     GOOGLE_APP_SCRIPT_URL: str | None = None
+    GOOGLE_SCRIPT_URL: str | None = None
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: str | None = None
     SMTP_SERVER: str | None = None
     SMTP_PORT: int = 587
     SMTP_USERNAME: str | None = None
@@ -145,7 +147,7 @@ class Settings(BaseSettings):
     @property
     def email_configured(self) -> bool:
         """Email is usable if Google App Script URL or full SMTP credentials are present."""
-        if bool(self.GOOGLE_APP_SCRIPT_URL):
+        if bool(self.GOOGLE_APP_SCRIPT_URL or self.GOOGLE_SCRIPT_URL):
             return True
         username = self.EMAIL_SENDER or self.SMTP_USERNAME
         password = self.EMAIL_APP_PASSWORD or self.SMTP_PASSWORD

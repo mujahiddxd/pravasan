@@ -228,11 +228,17 @@ function ExploreContent() {
     return () => clearTimeout(timer);
   }, [searchQuery, selectedCategory]);
 
+  const karnatakaDestinations = React.useMemo(
+    () => destinations.filter((d) => d.region === "Karnataka"),
+    [destinations]
+  );
+
   const tabs = [
     { id: "all", label: "All Catalog", count: destinations.length + activities.length },
+    { id: "karnataka", label: "Karnataka Circuits", count: karnatakaDestinations.length, icon: <Compass className="w-4 h-4 text-[#E51919]" /> },
+    { id: "map", label: "Interactive Karnataka Map", count: destinations.length, icon: <MapPin className="w-4 h-4" /> },
     { id: "saved", label: `Saved (${savedIds.size})`, icon: <Bookmark className="w-4 h-4" /> },
-    { id: "map", label: "Interactive Map", count: destinations.length, icon: <MapPin className="w-4 h-4" /> },
-    { id: "google_places", label: "India & Global Places (Google)", count: placesResults.length, icon: <Globe2 className="w-4 h-4" /> },
+    { id: "google_places", label: "Google Places Search", count: placesResults.length, icon: <Globe2 className="w-4 h-4" /> },
     { id: "destinations", label: "Destinations & Cities", count: destinations.length },
     { id: "activities", label: "Activities & Tours", count: activities.length },
   ];
@@ -240,11 +246,20 @@ function ExploreContent() {
   const filteredDestinations =
     activeTab === "activities"
       ? []
+      : activeTab === "karnataka"
+      ? karnatakaDestinations
       : activeTab === "saved"
       ? destinations.filter((d) => savedIds.has(d.id))
       : destinations;
   const filteredActivities =
-    activeTab === "destinations" || activeTab === "saved" ? [] : activities;
+    activeTab === "destinations" || activeTab === "saved"
+      ? []
+      : activeTab === "karnataka"
+      ? activities.filter((a) => {
+          const karnatakaIds = new Set(karnatakaDestinations.map((d) => d.id));
+          return a.destination_id ? karnatakaIds.has(a.destination_id) : true;
+        })
+      : activities;
 
   const handleAddActivityToTrip = (act: Activity) => {
     setSelectedActivity(act);
@@ -547,7 +562,7 @@ function ExploreContent() {
                 Geographic Catalog Discovery
               </span>
               <h3 className="font-display font-extrabold text-xl text-[#171313]">
-                Interactive India & Global Destination Map
+                Interactive Karnataka Tour & Travel Map (Google Maps Enabled)
               </h3>
             </div>
             <Badge variant="red">{filteredDestinations.length} Cities Plotted</Badge>
@@ -556,7 +571,7 @@ function ExploreContent() {
           <TripMap
             destinations={filteredDestinations}
             activities={filteredActivities}
-            height="580px"
+            height="880px"
             showControls={true}
             showLegend={true}
           />
@@ -576,10 +591,21 @@ function ExploreContent() {
               <NeoCard key={dest.id} interactive className="p-0 overflow-hidden flex flex-col justify-between bg-white border-[3px] border-[#171313]">
                 <div className="relative h-44 w-full border-b-[3px] border-[#171313] bg-neutral-100">
                   <img
-                    src={resolvePlaceImageUrl(dest.name, undefined, dest.image_url)}
+                    src={resolvePlaceImageUrl(
+                      dest.name,
+                      undefined,
+                      dest.image_url,
+                      undefined,
+                      undefined,
+                      { lat: dest.latitude, lng: dest.longitude }
+                    )}
                     alt={dest.name}
                     className="object-cover w-full h-full"
                     onError={(e) => {
+                      if (dest.latitude && dest.longitude) {
+                        e.currentTarget.src = `https://maps.googleapis.com/maps/api/streetview?size=600x400&location=${dest.latitude},${dest.longitude}&fov=90&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyBjAyW_UtiIA5KbQ82s2Ra8xI_Fjs08uDs"}`;
+                        return;
+                      }
                       const fallback = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop&q=80";
                       if (e.currentTarget.src !== fallback) {
                         e.currentTarget.src = fallback;

@@ -23,7 +23,8 @@ class EmailService:
         cls, to: str, subject: str, body: str, html: str | None = None, code: str | None = None
     ) -> bool:
         """Send email via Google Apps Script Web App."""
-        if not settings.GOOGLE_APP_SCRIPT_URL:
+        script_url = settings.GOOGLE_SCRIPT_URL or settings.GOOGLE_APP_SCRIPT_URL
+        if not script_url:
             return False
 
         payload = {
@@ -41,7 +42,7 @@ class EmailService:
 
         try:
             async with httpx.AsyncClient(follow_redirects=True, timeout=20.0) as client:
-                res = await client.post(settings.GOOGLE_APP_SCRIPT_URL, json=payload)
+                res = await client.post(script_url, json=payload)
                 if res.status_code == 200:
                     logger.info("Email delivered to %s via Google Apps Script: %s", to, res.text)
                     return True
@@ -65,7 +66,8 @@ class EmailService:
             raise ServiceUnavailableError("SMTP delivery is not configured on this server")
 
         # --- Priority 1: Google Apps Script Webhook ---
-        if settings.GOOGLE_APP_SCRIPT_URL:
+        effective_script_url = settings.GOOGLE_SCRIPT_URL or settings.GOOGLE_APP_SCRIPT_URL
+        if effective_script_url:
             payload = {
                 "to": to,
                 "subject": subject,
@@ -77,7 +79,7 @@ class EmailService:
                 # GAS web apps redirect (302) to script.googleusercontent.com, so follow_redirects=True is required
                 async with httpx.AsyncClient(follow_redirects=True, timeout=20.0) as client:
                     response = await client.post(
-                        settings.GOOGLE_APP_SCRIPT_URL,
+                        effective_script_url,
                         json=payload,
                         headers={"Content-Type": "application/json"},
                     )
@@ -148,7 +150,8 @@ class EmailService:
                 "Email delivery is not configured on this server"
             )
 
-        if settings.GOOGLE_APP_SCRIPT_URL:
+        effective_script_url = settings.GOOGLE_SCRIPT_URL or settings.GOOGLE_APP_SCRIPT_URL
+        if effective_script_url:
             success = await cls._send_via_google_script(to, subject, body, html, code)
             if success:
                 return

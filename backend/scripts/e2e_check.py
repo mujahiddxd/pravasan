@@ -48,7 +48,7 @@ def data(resp: httpx.Response) -> dict:
 def main() -> None:
     # Unique per run so the script can be re-run against the same database.
     stamp = secrets.token_hex(4)
-    client = httpx.Client(base_url=BASE, timeout=30)
+    client = httpx.Client(base_url=BASE, timeout=60)
 
     print("\n1. Register")
     email = f"e2e{stamp}@example.com"

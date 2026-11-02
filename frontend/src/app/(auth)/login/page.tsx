@@ -126,7 +126,7 @@ function LoginContent() {
           body: JSON.stringify({
             email,
             first_name: user.firstName || "Traveler",
-            last_name: user.lastName || "",
+            last_name: user.lastName || "User",
             clerk_id: user.id,
             role: chosenRole,
           }),
@@ -218,7 +218,7 @@ function LoginContent() {
           <span>{currentConfig.badge} WORKSPACE</span>
         </div>
         <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-[#171313] tracking-tight">
-          Welcome to Tripzyy
+          Welcome to Pravasan • ಪ್ರವಾಸನ್
         </h1>
         <p className="text-xs sm:text-sm font-medium text-neutral-600 mt-1">
           Sign in to access your {currentConfig.title.toLowerCase()}.

@@ -41,7 +41,7 @@ class Destination(UUIDMixin, TimestampMixin, Base):
     popularity_score: Mapped[int] = mapped_column(
         Integer, nullable=False, default=0, server_default="0"
     )
-    image_url: Mapped[str | None] = mapped_column(String(500))
+    image_url: Mapped[str | None] = mapped_column(Text)
     latitude: Mapped[float | None] = mapped_column(Numeric(9, 6))
     longitude: Mapped[float | None] = mapped_column(Numeric(9, 6))
 
@@ -108,7 +108,7 @@ class ActivityCatalog(UUIDMixin, TimestampMixin, Base):
         String(3), nullable=False, default="INR", server_default="INR"
     )
     duration_minutes: Mapped[int | None] = mapped_column(Integer)
-    image_url: Mapped[str | None] = mapped_column(String(500))
+    image_url: Mapped[str | None] = mapped_column(Text)
     rating: Mapped[float | None] = mapped_column(Numeric(2, 1))
     is_active: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=True, server_default=text("true")

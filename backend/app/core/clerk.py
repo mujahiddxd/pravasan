@@ -27,7 +27,7 @@ from app.core.exceptions import UnauthorizedError
 
 logger = logging.getLogger("tripzyy.clerk")
 
-_DEFAULT_FRONTEND_API = "meet-monkfish-1812.clerk.accounts.dev"
+_DEFAULT_FRONTEND_API = "rational-reptile-3877.clerk.accounts.dev"
 
 
 def get_clerk_frontend_api() -> str:
@@ -89,34 +89,31 @@ def verify_clerk_token(token: str) -> dict:
     issuer = f"https://{frontend_api}"
     jwks = _fetch_jwks()
 
-    try:
-        payload = jwt.decode(
+    def _decode_and_validate(keys: dict) -> dict:
+        decoded = jwt.decode(
             token,
-            jwks,
+            keys,
             algorithms=["RS256"],
             options={
-                "verify_aud": False,  # Clerk session tokens don't set aud
-                "verify_iss": True,
+                "verify_aud": False,
+                "verify_iss": False,
             },
-            issuer=issuer,
         )
-        return payload
-    except JWTError:
+        token_iss = (decoded.get("iss") or "").rstrip("/")
+        expected_iss = issuer.rstrip("/")
+        if token_iss != expected_iss and frontend_api not in token_iss:
+            logger.warning("Clerk issuer mismatch: got %r, expected %r", token_iss, expected_iss)
+            raise UnauthorizedError("Invalid token issuer")
+        return decoded
+
+    try:
+        return _decode_and_validate(jwks)
+    except (JWTError, UnauthorizedError):
         # Key may have rotated — clear cache and retry once
         _fetch_jwks.cache_clear()
         jwks = _fetch_jwks()
         try:
-            payload = jwt.decode(
-                token,
-                jwks,
-                algorithms=["RS256"],
-                options={
-                    "verify_aud": False,
-                    "verify_iss": True,
-                },
-                issuer=issuer,
-            )
-            return payload
+            return _decode_and_validate(jwks)
         except JWTError as exc:
             logger.warning("Clerk JWT verification failed: %s", exc)
             raise UnauthorizedError(

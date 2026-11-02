@@ -44,29 +44,29 @@ interface NavItem {
 // 1. Explorer / Traveller Navigation
 const explorerNavItems: NavItem[] = [
   {
-    label: "Explorer Desk",
+    label: "ಮುಖಪುಟ • Explorer Desk",
     href: "/dashboard",
     icon: <Compass className="w-5 h-5" />,
   },
   {
-    label: "My Expeditions",
+    label: "ಪ್ರವಾಸಗಳು • My Trips",
     href: "/trips",
     icon: <MapPin className="w-5 h-5" />,
   },
   {
-    label: "Plan New Trip",
+    label: "ಹೊಸ ಪ್ರವಾಸ • Plan Trip",
     href: "/trips/new",
     icon: <PlusCircle className="w-5 h-5" />,
     badge: "AI",
     badgeColor: "bg-[#E51919] text-white",
   },
   {
-    label: "Discover Places",
+    label: "ಅನ್ವೇಷಿಸಿ • Discover",
     href: "/explore",
     icon: <Compass className="w-5 h-5" />,
   },
   {
-    label: "Trip Calendar",
+    label: "ಕ್ಯಾಲೆಂಡರ್ • Calendar",
     href: "/calendar",
     icon: <CalendarIcon className="w-5 h-5" />,
   },

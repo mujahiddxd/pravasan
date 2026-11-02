@@ -22,6 +22,9 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v
 
 // High-definition curated photography database for major Indian tourist landmarks and destinations
 export const CURATED_INDIAN_PLACE_IMAGES: Record<string, string> = {
+  "kudremukh": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&auto=format&fit=crop&q=85",
+  "karwar": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&auto=format&fit=crop&q=85",
+
   // Mumbai
   "marine drive": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1000&auto=format&fit=crop&q=85",
   "gateway of india": "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1000&auto=format&fit=crop&q=85",
@@ -52,7 +55,7 @@ export const CURATED_INDIAN_PLACE_IMAGES: Record<string, string> = {
   "panaji": "https://images.unsplash.com/photo-1614082242765-7c98ca0f3df3?w=1000&auto=format&fit=crop&q=85",
   "dudhsagar": "https://images.unsplash.com/photo-1582650625119-3a31f8418b7d?w=1000&auto=format&fit=crop&q=85",
 
-  // Karnataka / Mysuru / Bengaluru / Gokarna
+  // Karnataka / Mysuru / Bengaluru / Gokarna / Malnad / Heritage
   "mysore palace": "https://images.unsplash.com/photo-1600100397803-0c46cf617f69?w=1000&auto=format&fit=crop&q=85",
   "mysuru": "https://images.unsplash.com/photo-1600100397803-0c46cf617f69?w=1000&auto=format&fit=crop&q=85",
   "lalbagh": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=1000&auto=format&fit=crop&q=85",
@@ -62,6 +65,25 @@ export const CURATED_INDIAN_PLACE_IMAGES: Record<string, string> = {
   "om beach": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=1000&auto=format&fit=crop&q=85",
   "hampi": "https://images.unsplash.com/photo-1600100397864-4e201b131804?w=1000&auto=format&fit=crop&q=85",
   "coorg": "https://images.unsplash.com/photo-1582650625119-3a31f8418b7d?w=1000&auto=format&fit=crop&q=85",
+  "chikkamagaluru": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=1000&auto=format&fit=crop&q=85",
+  "mullayanagiri": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&auto=format&fit=crop&q=85",
+  "mangaluru": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&auto=format&fit=crop&q=85",
+  "badami": "https://images.unsplash.com/photo-1600100397608-f010f4448555?w=1000&auto=format&fit=crop&q=85",
+  "pattadakal & aihole": "https://images.unsplash.com/photo-1548013146-72479768bada?w=1000&auto=format&fit=crop&q=85",
+  "belur & halebidu": "https://images.unsplash.com/photo-1548013146-72479768bada?w=1000&auto=format&fit=crop&q=85",
+  "dandeli": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1000&auto=format&fit=crop&q=85",
+  "kabini": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1000&auto=format&fit=crop&q=85",
+  "bandipur national park": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1000&auto=format&fit=crop&q=85",
+  "shivamogga & jog falls": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1000&auto=format&fit=crop&q=85",
+  "jog falls": "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1000&auto=format&fit=crop&q=85",
+  "murudeshwar": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1000&auto=format&fit=crop&q=85",
+  "chitradurga": "https://images.unsplash.com/photo-1592635196078-9fdc757f27f4?w=1000&auto=format&fit=crop&q=85",
+  "vijayapura": "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1000&auto=format&fit=crop&q=85",
+  "bidar": "https://images.unsplash.com/photo-1598324789736-4861f89564a0?w=1000&auto=format&fit=crop&q=85",
+  "sakleshpur": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&auto=format&fit=crop&q=85",
+  "belagavi": "https://images.unsplash.com/photo-1592635196078-9fdc757f27f4?w=1000&auto=format&fit=crop&q=85",
+  "shravanabelagola": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1000&auto=format&fit=crop&q=85",
+  "dharmasthala & kukke": "https://images.unsplash.com/photo-1548013146-72479768bada?w=1000&auto=format&fit=crop&q=85",
 
   // Rajasthan / Jaipur / Udaipur / Jodhpur
   "jaipur": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1000&auto=format&fit=crop&q=85",
@@ -147,6 +169,28 @@ export const CURATED_INDIAN_PLACE_IMAGES: Record<string, string> = {
 };
 
 export const DESTINATION_IMAGES: Record<string, string> = {
+  "kudremukh": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kudremukha_Peak_Trek.jpg/1280px-Kudremukha_Peak_Trek.jpg",
+  "karwar": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Karwar_Beach_View.jpg/1280px-Karwar_Beach_View.jpg",
+
+  "mysuru": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Mysore_Palace_Morning_2017.jpg/1280px-Mysore_Palace_Morning_2017.jpg",
+  "chikkamagaluru": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mullayanagiri_Peak.jpg/1280px-Mullayanagiri_Peak.jpg",
+  "mangaluru": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Panambur_Beach_Mangalore.jpg/1280px-Panambur_Beach_Mangalore.jpg",
+  "badami": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Cave_temples_Badami.jpg/1280px-Cave_temples_Badami.jpg",
+  "pattadakal & aihole": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Virupaksha_temple_Pattadakal.jpg/1280px-Virupaksha_temple_Pattadakal.jpg",
+  "belur & halebidu": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Chennakesava_Temple%2C_Belur.jpg/1280px-Chennakesava_Temple%2C_Belur.jpg",
+  "dandeli": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/River_Kali_Dandeli.jpg/1280px-River_Kali_Dandeli.jpg",
+  "kabini": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Kabini_river_wildlife.jpg/1280px-Kabini_river_wildlife.jpg",
+  "bandipur national park": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Bandipur_National_Park.jpg/1280px-Bandipur_National_Park.jpg",
+  "shivamogga & jog falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Jog_Falls_Karnataka_India.jpg/1280px-Jog_Falls_Karnataka_India.jpg",
+  "murudeshwar": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Murudeshwar_Shiva_Statue.jpg/1280px-Murudeshwar_Shiva_Statue.jpg",
+  "chitradurga": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Chitradurga_Fort.jpg/1280px-Chitradurga_Fort.jpg",
+  "vijayapura": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Gol_Gumbaz_Bijapur.jpg/1280px-Gol_Gumbaz_Bijapur.jpg",
+  "bidar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Bidar_Fort_Entrance.jpg/1280px-Bidar_Fort_Entrance.jpg",
+  "sakleshpur": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Manjarabad_Fort_Sakleshpur.jpg/1280px-Manjarabad_Fort_Sakleshpur.jpg",
+  "belagavi": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gokak_Falls_Belgaum.jpg/1280px-Gokak_Falls_Belgaum.jpg",
+  "shravanabelagola": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Gommateshwara_Statue_Shravanabelagola.jpg/1280px-Gommateshwara_Statue_Shravanabelagola.jpg",
+  "dharmasthala & kukke": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Dharmasthala_Temple.jpg/1280px-Dharmasthala_Temple.jpg",
+
   "agra":
     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Taj_Mahal%2C_Agra%2C_India.jpg/1280px-Taj_Mahal%2C_Agra%2C_India.jpg",
   "ahmedabad":
@@ -270,7 +314,8 @@ export function resolvePlaceImageUrl(
   photos?: { name: string }[],
   existingImageUrl?: string | null,
   destinationName?: string | null,
-  category?: string | null
+  category?: string | null,
+  coords?: { lat?: number | null; lng?: number | null }
 ): string {
   // 1. A stored image wins -- unless what was stored is the placeholder, in
   //    which case it is not an image of anywhere and must not beat a real one.
@@ -284,7 +329,8 @@ export function resolvePlaceImageUrl(
 
   // 2. If Google Place photo resource is available, use backend photo proxy
   if (photos && photos.length > 0 && photos[0]?.name) {
-    return `${API_BASE}/places/photo?name=${encodeURIComponent(photos[0].name)}&max_height=600&max_width=800`;
+    const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyBjAyW_UtiIA5KbQ82s2Ra8xI_Fjs08uDs";
+    return `https://places.googleapis.com/v1/${photos[0].name}/media?maxHeightPx=800&maxWidthPx=1200&key=${GOOGLE_KEY}`;
   }
 
   const tables = [CURATED_INDIAN_PLACE_IMAGES, DESTINATION_IMAGES];
@@ -345,5 +391,10 @@ export function resolvePlaceImageUrl(
   }
 
   // 6. Generic backdrop
+  if (coords?.lat && coords?.lng) {
+    const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyBjAyW_UtiIA5KbQ82s2Ra8xI_Fjs08uDs";
+    return `https://maps.googleapis.com/maps/api/streetview?size=800x600&location=${coords.lat},${coords.lng}&fov=90&key=${GOOGLE_KEY}`;
+  }
+
   return GENERIC_FALLBACK;
 }

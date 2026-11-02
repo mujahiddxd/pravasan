@@ -409,7 +409,7 @@ export default function TripDetailPage() {
               trip={trip}
               selectedStopId={selectedMapStopId}
               onSelectStop={(s) => setSelectedMapStopId(s.id)}
-              height="580px"
+              height="880px"
               showControls={true}
               showLegend={true}
             />

@@ -287,8 +287,23 @@ async def clerk_sync(
         if not email:
             raise UnauthorizedError("Unable to determine user email")
 
-        first_name = clerk_info.get("first_name") or payload.first_name or "Traveler"
-        last_name = clerk_info.get("last_name") or payload.last_name or ""
+        raw_first = (clerk_info.get("first_name") or payload.first_name or "").strip()
+        raw_last = (clerk_info.get("last_name") or payload.last_name or "").strip()
+
+        if not raw_first:
+            first_name = email.split("@")[0].capitalize() or "Traveler"
+        else:
+            first_name = raw_first
+
+        if not raw_last:
+            if " " in first_name:
+                parts = first_name.split(" ", 1)
+                first_name, last_name = parts[0], parts[1]
+            else:
+                last_name = "User"
+        else:
+            last_name = raw_last
+
         verified_clerk_id = clerk_info.get("clerk_id") or clerk_user_id
 
         # Role: prefer explicit payload role if specified as operator/coordinator/admin, then Clerk metadata, default user
@@ -372,6 +387,8 @@ async def clerk_sync(
                 user = await UserRepository(db).get_by_email(email)
                 if not user and verified_clerk_id:
                     user = await db.scalar(select(User).where(User.clerk_id == verified_clerk_id))
+                if not user:
+                    raise exc
         else:
             # Update existing user
             updated = False
